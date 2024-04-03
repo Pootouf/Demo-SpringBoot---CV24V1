@@ -1,8 +1,9 @@
 package fr.univrouen.cv24.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import fr.univrouen.cv24.model.TestCV;
+import fr.univrouen.cv24.util.Fichier;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class GetController {
@@ -23,6 +24,17 @@ public class GetController {
             @RequestParam(value = "id") int id,
             @RequestParam(value = "titre") String titre
     ) {
-        return "Test : <br/>id = " + id + "<br/>titre = " + titre;
+        return "Testttttttttt : <br/>id = " + id + "<br/>titre = " + titre;
+    }
+
+    @GetMapping("/testfic")
+    public String getTestFic() {
+        return Fichier.loadFileXML();
+    }
+
+    @RequestMapping(value="/testxml", produces = MediaType.APPLICATION_XML_VALUE)
+    public @ResponseBody TestCV getXML() {
+        TestCV cv = new TestCV("HAMILTON","Margaret","1969/07/21", "Appollo11@nasa.us");
+        return cv;
     }
 }
